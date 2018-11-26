@@ -1,6 +1,7 @@
 FROM alpine:3.8
 
-ENV SCEPTRE_VERSION=1.4.2
+ARG SCEPTRE_VERSION
+ENV SCEPTRE_VERSION=${SCEPTRE_VERSION}
 
 RUN apk -v --no-cache add \
         python3 \
@@ -14,6 +15,7 @@ RUN apk -v --no-cache add \
         zip \
         git \
         && \
+    pip3 install --upgrade pip && \
     pip3 install --no-cache-dir --upgrade sceptre==$SCEPTRE_VERSION troposphere>=2.0.0 && \
     update-ca-certificates
 
